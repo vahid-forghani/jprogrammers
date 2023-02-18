@@ -1,0 +1,15 @@
+{
+  "name": "jprogrammers",
+  "version": "1.0.0",
+  "description": "api for jprogrammers application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vahid Forghani",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.9.2"
+  }
+}

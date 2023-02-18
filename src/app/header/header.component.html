@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Jprogrammers</span>
+    <button mat-button [matMenuTriggerFor]="categoriesMenu">Categories</button>
+    <mat-menu #categoriesMenu="matMenu" yPosition="above">
+      <button *ngFor="let category of categories" mat-menu-item>{{category.name}}</button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
