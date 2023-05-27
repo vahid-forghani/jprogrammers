@@ -9,28 +9,47 @@ import { HeaderComponent } from './header/header.component';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
 import { ArticleComponent } from './article/article.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {MatInputModule} from '@angular/material/input';
+import { LoginComponent } from './login/login.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { JwtInterceptor } from './security/jwt.interceptor';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesComponent,
     HeaderComponent,
-    ArticleComponent
+    ArticleComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     MatMenuModule,
     MatButtonModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule,
+    MatInputModule,
+    MatGridListModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

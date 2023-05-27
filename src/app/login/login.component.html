@@ -1,0 +1,17 @@
+<mat-grid-list cols="1" rowHeight="10:1">
+  <mat-grid-tile>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput [formControl]="loginForm.controls.username" />
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput [formControl]="loginForm.controls.password" />
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-raised-button color="accent" (click)="login()">Login</button>
+  </mat-grid-tile>
+</mat-grid-list>
