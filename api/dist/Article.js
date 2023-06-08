@@ -8,6 +8,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const articleSchema = new mongoose_1.default.Schema({
     id: String,
     title: String,
+    description: String,
     content: String
 });
 exports.Article = mongoose_1.default.model('Article', articleSchema);

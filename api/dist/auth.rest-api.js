@@ -4,20 +4,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthRestApi = void 0;
-const User_1 = require("./User");
+const user_1 = require("./user");
 const body_parser_1 = __importDefault(require("body-parser"));
-const JwtService_1 = require("./JwtService");
+const jwt_service_1 = require("./jwt.service");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 var jsonParser = body_parser_1.default.json();
 class AuthRestApi {
     constructor(app) {
-        this.jwtService = new JwtService_1.JwtService();
+        this.jwtService = new jwt_service_1.JwtService();
         this.init(app);
     }
     init(app) {
         app.post('/login', jsonParser, (request, response) => {
             const { username, password } = request.body;
-            User_1.User.find({ username }, (error, documents) => {
+            user_1.User.find({ username }, (error, documents) => {
                 if (documents.length == 0) {
                     response.status(404).send({ message: 'Not found' });
                 }

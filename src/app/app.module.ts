@@ -18,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import { LoginComponent } from './login/login.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { JwtInterceptor } from './security/jwt.interceptor';
+import {MatCardModule} from '@angular/material/card'
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { JwtInterceptor } from './security/jwt.interceptor';
     MatToolbarModule,
     MatIconModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCardModule
   ],
   providers: [
     {

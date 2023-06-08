@@ -1,7 +1,7 @@
 import { FormArray } from "@angular/forms";
-import { Category } from "../domain/Category";
-import { CategoryForm } from "./CategoryForm";
-import { CategoryFormGroup } from "./CategoryFormGroup";
+import { Category } from "../domain/category";
+import { CategoryForm } from "./category.form";
+import { CategoryFormGroup } from "./category.form-group";
 
 export class CategoryFormArray extends FormArray<CategoryFormGroup> {
 

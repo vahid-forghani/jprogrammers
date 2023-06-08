@@ -1,8 +1,8 @@
 import express from 'express';
 import mongoose, { ConnectOptions } from 'mongoose';
-import { CategoryRestApi } from './CategoryRestApi';
-import { ArticleRestApi } from './ArticleRestApi';
-import { AuthRestApi } from './AuthRestApi';
+import { CategoryRestApi } from './category.rest-api';
+import { ArticleRestApi } from './article.rest-api';
+import { AuthRestApi } from './auth.rest-api';
 import * as dotenv from 'dotenv';
 dotenv.config();
 

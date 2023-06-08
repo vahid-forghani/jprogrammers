@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Article } from '../domain/Article';
+import { Article } from '../domain/article';
 import { ArticleService } from '../service/article.service';
 
 @Component({
@@ -13,6 +13,10 @@ export class ArticlesComponent {
 
   constructor(private articleService: ArticleService) {
     articleService.getArticles().subscribe(articles => this.articles = articles);
+  }
+
+  addNewArticle(): void {
+    this.articleService.addArticle({} as Article).subscribe();
   }
 
 }

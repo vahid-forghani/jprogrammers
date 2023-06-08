@@ -1,6 +1,6 @@
 import { FormControl, FormGroup } from "@angular/forms";
 import { LoginForm } from "./LoginForm";
-import { Login } from "../domain/Login";
+import { Login } from "../domain/login";
 
 export class LoginFormGroup extends FormGroup<LoginForm> {
   constructor() {

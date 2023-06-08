@@ -1,8 +1,7 @@
 import bodyParser from "body-parser";
 import { Express, Request, Response } from "express";
-import { Category } from "./Category";
-import { METHODS } from "http";
-import { JwtService } from "./JwtService";
+import { Category } from "./category";
+import { JwtService } from "./jwt.service";
 
 var jsonParser = bodyParser.json();
 

@@ -1,6 +1,23 @@
-<mat-list>
-  <mat-list-item *ngFor="let article of articles">
-    <span matListItemTitle>{{article.title}}</span>
-    <span matListItemLine>{{article.content}}</span>
-  </mat-list-item>
-</mat-list>
+<button mat-raised-button color="accent" (click)="addNewArticle()">Add new article</button>
+<div *ngFor="let article of articles">
+  <mat-card>
+    <mat-card-header [routerLink]="'/articles/' + article._id">
+      <div mat-card-avatar>
+        <img [src]="'/articles/' + article._id + '/createdByAvatar'"/>
+      </div>
+      <mat-card-title>{{article.title}}</mat-card-title>
+      <mat-card-subtitle>{{article.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="'/articles/' + article._id + '/image'">
+    <mat-card-content>
+      <p>
+        {{article.content}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+  <br/>
+</div>

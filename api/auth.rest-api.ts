@@ -1,7 +1,7 @@
 import { Express } from "express";
-import { User } from "./User";
+import { User } from "./user";
 import bodyParser from "body-parser";
-import { JwtService } from "./JwtService";
+import { JwtService } from "./jwt.service";
 import bcrypt from "bcrypt";
 
 var jsonParser = bodyParser.json();

@@ -5,12 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoryRestApi = void 0;
 const body_parser_1 = __importDefault(require("body-parser"));
-const Category_1 = require("./Category");
-const JwtService_1 = require("./JwtService");
+const category_1 = require("./category");
+const jwt_service_1 = require("./jwt.service");
 var jsonParser = body_parser_1.default.json();
 class CategoryRestApi {
     constructor(app) {
-        this.jwtService = new JwtService_1.JwtService();
+        this.jwtService = new jwt_service_1.JwtService();
         this.setupAccessRules(app);
         this.setUpRoutes(app);
     }
@@ -25,19 +25,19 @@ class CategoryRestApi {
     }
     setUpRoutes(app) {
         app.get('/categories', (request, response) => {
-            Category_1.Category.find({}, (error, documents) => {
+            category_1.Category.find({}, (error, documents) => {
                 response.send(documents);
             });
         });
         app.post('/categories', jsonParser, (request, response) => {
             const { name } = request.body;
-            Category_1.Category.create({ name }, (error, document) => {
+            category_1.Category.create({ name }, (error, document) => {
                 response.send(document);
             });
         });
         app.patch('/categories', jsonParser, (request, response) => {
             const category = request.body;
-            Category_1.Category.updateOne({ _id: category._id }, category, (error, document) => {
+            category_1.Category.updateOne({ _id: category._id }, category, (error, document) => {
                 response.send(document);
             });
         });

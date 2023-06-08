@@ -28,16 +28,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const CategoryRestApi_1 = require("./CategoryRestApi");
-const ArticleRestApi_1 = require("./ArticleRestApi");
-const AuthRestApi_1 = require("./AuthRestApi");
+const category_rest_api_1 = require("./category.rest-api");
+const article_rest_api_1 = require("./article.rest-api");
+const auth_rest_api_1 = require("./auth.rest-api");
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const app = (0, express_1.default)();
 const port = 3000;
-new AuthRestApi_1.AuthRestApi(app);
-new CategoryRestApi_1.CategoryRestApi(app);
-new ArticleRestApi_1.ArticleRestApi(app);
+new auth_rest_api_1.AuthRestApi(app);
+new category_rest_api_1.CategoryRestApi(app);
+new article_rest_api_1.ArticleRestApi(app);
 app.listen(port, () => {
     console.log('listening on port: ' + port);
 });
