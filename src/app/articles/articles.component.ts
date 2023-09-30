@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Article } from '../domain/article';
-import { ArticleService } from '../service/article.service';
+import {Component} from '@angular/core';
+import {Article} from '../domain/article';
+import {ArticleService} from '../service/article.service';
 
 @Component({
   selector: 'app-articles',
@@ -11,12 +11,8 @@ export class ArticlesComponent {
 
   articles: Article[] = [];
 
-  constructor(private articleService: ArticleService) {
+  constructor(articleService: ArticleService) {
     articleService.getArticles().subscribe(articles => this.articles = articles);
-  }
-
-  addNewArticle(): void {
-    this.articleService.addArticle({} as Article).subscribe();
   }
 
 }

@@ -11,10 +11,10 @@ export class AuthRestApi {
   jwtService = new JwtService();
 
   constructor(app: Express) {
-    this.init(app);
+    this.setupRoutes(app);
   }
 
-  private init(app: Express) {
+  private setupRoutes(app: Express) {
 
     app.post('/login', jsonParser, (request, response) => {
       const {username, password} = request.body;

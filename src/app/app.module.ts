@@ -19,6 +19,8 @@ import { LoginComponent } from './login/login.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { JwtInterceptor } from './security/jwt.interceptor';
 import {MatCardModule} from '@angular/material/card'
+import {NgOptimizedImage} from "@angular/common";
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -27,24 +29,26 @@ import {MatCardModule} from '@angular/material/card'
     ArticlesComponent,
     HeaderComponent,
     ArticleComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatListModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatInputModule,
-    MatGridListModule,
-    MatCardModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatListModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatInputModule,
+        MatGridListModule,
+        MatCardModule,
+        NgOptimizedImage
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
-import { Category } from '../domain/category';
-import { HeaderService } from '../service/header.service';
-import { CategoryFormArray } from './category.form-array';
-import { CategoryFormGroup } from './category.form-group';
-import { AuthService } from '../service/auth.service';
+import {Component} from '@angular/core';
+import {HeaderService} from '../service/header.service';
+import {CategoryFormArray} from './category.form-array';
+import {CategoryFormGroup} from './category.form-group';
+import {AuthService} from '../service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -43,7 +41,7 @@ export class HeaderComponent {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    this.authService.logout();
   }
 
 }

@@ -1,28 +1,23 @@
 <mat-toolbar>
-  <mat-toolbar-row>
-    <span routerLink="">Jprogrammers</span>
-    <section>
-      <div class="button-row">
-        <ng-container *ngFor="let category of categories.controls">
-          <button *ngIf="!category.controls.edit.value" mat-button>
-            {{ category.controls.name.value }}
-          </button>
-          <mat-form-field *ngIf="isLoggedIn() && category.controls.edit.value">
-            <mat-label>Name</mat-label>
-            <input matInput [formControl]="category.controls.name" />
-          </mat-form-field>
-          <button *ngIf="isLoggedIn()"
+  <span routerLink="" class="home">Jprogrammers</span>
+  <ng-container *ngFor="let category of categories.controls">
+    <button *ngIf="!category.controls.edit.value" mat-button>
+      {{ category.controls.name.value }}
+    </button>
+    <mat-form-field *ngIf="isLoggedIn() && category.controls.edit.value">
+      <mat-label>Name</mat-label>
+      <input matInput [formControl]="category.controls.name"/>
+    </mat-form-field>
+    <button *ngIf="isLoggedIn()"
             mat-icon-button
             color="accent"
             aria-label="Example icon button with a home icon"
             (click)="switchEditMode(category)"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-        </ng-container>
-        <button mat-button *ngIf="isLoggedIn()" (click)="addNewCategory()">add new category</button>
-      </div>
-      <button mat-button *ngIf="isLoggedIn()" (click)="logout()">logout</button>
-    </section>
-  </mat-toolbar-row>
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+  </ng-container>
+  <button mat-button *ngIf="isLoggedIn()" (click)="addNewCategory()">add new category</button>
+  <span class="spacer"></span>
+  <button mat-button *ngIf="isLoggedIn()" (click)="logout()">logout</button>
 </mat-toolbar>

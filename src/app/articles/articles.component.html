@@ -1,14 +1,13 @@
-<button mat-raised-button color="accent" (click)="addNewArticle()">Add new article</button>
 <div *ngFor="let article of articles">
   <mat-card>
-    <mat-card-header [routerLink]="'/articles/' + article._id">
+    <mat-card-header [routerLink]="'/articles/' + article.id">
       <div mat-card-avatar>
-        <img [src]="'/articles/' + article._id + '/createdByAvatar'"/>
+        <img class="avatar" [src]="'/api/articles/' + article.id + '/avatar'" alt="no image"/>
       </div>
       <mat-card-title>{{article.title}}</mat-card-title>
       <mat-card-subtitle>{{article.description}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="'/articles/' + article._id + '/image'">
+    <img mat-card-image class="image" [src]="'/api/articles/' + article.id + '/image'" alt="no image"/>
     <mat-card-content>
       <p>
         {{article.content}}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../service/article.service';
 import { AuthService } from '../service/auth.service';
@@ -10,17 +10,25 @@ import { Article } from '../domain/article';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })
-export class ArticleComponent {
+export class ArticleComponent implements OnInit {
 
   article = new ArticleFormGroup();
+  formFata = new FormData();
+
+  @Input()
+  articleId: string | undefined = undefined;
 
   constructor(
-    activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private articleService: ArticleService,
     private authService: AuthService
   ) {
-    articleService.getArticle(activatedRoute.snapshot.paramMap.get('id'))
-    .subscribe(article => this.article.patchValue(article));
+
+  }
+
+  ngOnInit() {
+    this.articleService.getArticle(this.articleId || this.activatedRoute.snapshot.paramMap.get('id'))
+      .subscribe(article => this.article.patchValue(article));
   }
 
   updateArticle(): void {
@@ -29,5 +37,18 @@ export class ArticleComponent {
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
+  }
+
+  uploadImage() {
+    this.articleService.uploadImage(this.article.controls.id.value, this.formFata).subscribe();
+  }
+
+  uploadAvatar() {
+    this.articleService.uploadAvatar(this.article.controls.id.value, this.formFata).subscribe();
+  }
+
+  chooseFile(target: any) {
+    const files = target.files;
+    this.formFata.append('file', files[0], files[0].name);
   }
 }

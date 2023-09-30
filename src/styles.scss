@@ -12,7 +12,9 @@ body {
   max-width: 1000px;
   margin: 0 auto;
 }
-
 mat-card-title, p {
   color: aliceblue;
+}
+.mat-mdc-card-header-text, mat-form-field {
+  width: 100%;
 }

@@ -6,3 +6,11 @@ section {
   display: table-cell;
   max-width: 600px;
 }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.home {
+  cursor: pointer;
+}

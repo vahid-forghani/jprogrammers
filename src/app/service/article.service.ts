@@ -18,12 +18,15 @@ export class ArticleService {
     return this.http.get<Article>('/api/articles/' + id);
   }
 
-  addArticle(article: Article): Observable<Article> {
-    return this.http.post<Article>('/api/articles', article);
-  }
-
   updateArticle(article: Article): Observable<Article> {
     return this.http.put<Article>('/api/articles', article);
   }
 
+  uploadImage(id: string, data: FormData): Observable<void> {
+    return this.http.post<void>('/api/articles/' + id +'/image/upload', data);
+  }
+
+  uploadAvatar(id: string, data: FormData): Observable<void> {
+    return this.http.post<void>('/api/articles/' + id +'/avatar/upload', data);
+  }
 }
