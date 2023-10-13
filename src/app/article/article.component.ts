@@ -1,16 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ArticleService } from '../service/article.service';
-import { AuthService } from '../service/auth.service';
-import { ArticleFormGroup } from './article.form-qroup';
-import { Article } from '../domain/article';
+import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ArticleService} from '../service/article.service';
+import {AuthService} from '../service/auth.service';
+import {ArticleFormGroup} from './article.form-qroup';
+import {Article} from '../domain/article';
+import {highlightAll} from 'prismjs';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit, AfterViewChecked {
 
   article = new ArticleFormGroup();
   formFata = new FormData();
@@ -21,14 +22,17 @@ export class ArticleComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private articleService: ArticleService,
-    private authService: AuthService
-  ) {
+    private authService: AuthService) {
 
   }
 
   ngOnInit() {
     this.articleService.getArticle(this.articleId || this.activatedRoute.snapshot.paramMap.get('id'))
       .subscribe(article => this.article.patchValue(article));
+  }
+
+  ngAfterViewChecked() {
+    highlightAll();
   }
 
   updateArticle(): void {
