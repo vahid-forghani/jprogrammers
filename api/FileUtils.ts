@@ -11,6 +11,7 @@ export class FileUtils {
   }
 
   static rename(from: string | undefined, to: string) {
-    fs.rename(this.filePath + from, this.filePath + to, () => {});
+    fs.rename(this.filePath + from, this.filePath + to, () => {
+    });
   }
 }

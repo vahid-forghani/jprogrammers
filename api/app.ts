@@ -1,17 +1,18 @@
 import express from 'express';
-import mongoose, { ConnectOptions } from 'mongoose';
-import { CategoryRestApi } from './category.rest-api';
-import { ArticleRestApi } from './article.rest-api';
-import { AuthRestApi } from './auth.rest-api';
+import mongoose, {ConnectOptions} from 'mongoose';
+import {CategoryController} from './controller/category.controller';
+import {ArticleController} from './controller/article.controller';
+import {SecurityController} from './controller/security.controller';
 import * as dotenv from 'dotenv';
+
 dotenv.config();
 
 const app = express();
 const port = 3000;
 
-new AuthRestApi(app);
-new CategoryRestApi(app);
-new ArticleRestApi(app);
+new SecurityController(app);
+new CategoryController(app);
+new ArticleController(app);
 
 app.listen(port, () => {
   console.log('listening on port: ' + port)
@@ -28,4 +29,4 @@ mongoose.connect(
     pass: process.env.MONGO_PASSWORD
   } as ConnectOptions
 ).then(() => console.log('Connected to DB'))
-.catch((e) => console.log(e));
+  .catch((e) => console.log(e));

@@ -1,29 +1,14 @@
 <mat-card *ngIf="!isLoggedIn()">
   <mat-card-header>
-    <div mat-card-avatar>
-      <img class="avatar" [src]="'/api/articles/' + article.controls.id.value + '/avatar'" alt="no image"/>
-    </div>
     <mat-card-title>{{article.controls.title.value}}</mat-card-title>
     <mat-card-subtitle>{{article.controls.description.value}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image class="image" [src]="'/api/articles/' + article.controls.id.value + '/image'" alt="no image"/>
   <mat-card-content>
-    <p>
-      {{article.controls.content.value}}
-    </p>
+    <p [innerHTML]="article.controls.content.value"></p>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
 </mat-card>
 <mat-card *ngIf="isLoggedIn()">
   <mat-card-header>
-    <div mat-card-avatar>
-      <img class="avatar" [src]="'/api/articles/' + article.controls.id.value + '/avatar'" alt="no image"/>
-      <input type="file" name="image" (change)="chooseFile($event.target)"/>
-      <button mat-button (click)="uploadAvatar()">Upload</button>
-    </div>
     <mat-card-title>
       <mat-form-field>
         <mat-label>Id</mat-label>
@@ -41,9 +26,6 @@
       </mat-form-field>
     </mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image class="image" [src]="'/api/articles/' + article.controls.id.value + '/image'" alt="no image"/>
-  <input type="file" name="image" (change)="chooseFile($event.target)"/>
-  <button mat-button (click)="uploadImage()">Upload</button>
   <mat-card-content>
     <mat-form-field>
       <mat-label>Content</mat-label>
@@ -57,6 +39,8 @@
       >
       </textarea>
     </mat-form-field>
+    <p>Preview:</p>
+    <p [innerHTML]="article.controls.content.value"></p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="accent" (click)="updateArticle()">Save</button>

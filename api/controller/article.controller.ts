@@ -1,14 +1,12 @@
 import {Express, Request, Response} from "express";
-import {Article} from "./article";
-import {JwtService} from "./jwt.service";
+import {JwtService} from "../service/jwt.service";
 import bodyParser from "body-parser";
-import {FileUtils} from "./FileUtils";
+import {FileUtils} from "../FileUtils";
+import {ArticleService} from "../service/article.service";
 
-var jsonParser = bodyParser.json();
+const jsonParser = bodyParser.json();
 
-export class ArticleRestApi {
-
-  jwtService = new JwtService();
+export class ArticleController {
 
   constructor(app: Express) {
     this.setupAccessRules(app);
@@ -17,7 +15,7 @@ export class ArticleRestApi {
 
   private setupAccessRules(app: Express) {
     app.use('/articles', (request, response, next) => {
-      if (request.method != 'GET' && !this.jwtService.verify(request.header('token'))) {
+      if (request.method != 'GET' && !JwtService.verify(request.header('token'))) {
         response.status(403).send({message: 'Forbidden'});
         return;
       }
@@ -27,30 +25,20 @@ export class ArticleRestApi {
 
   private setupRoutes(app: Express) {
     app.get('/articles', (request: Request, response: Response) => {
-      Article.find({}, (error: any, documents: any) => {
-        response.send(documents);
-      });
+      ArticleService.getAll().then(articles =>
+        response.send(articles)
+      );
     });
 
     app.get('/articles/:id', (request, response) => {
-      Article.findOne({id: request.params.id}, (error: any, document: any) => {
-        response.send(document);
+      ArticleService.get(request.params.id).then(article => {
+        response.send(article);
       });
     });
 
     app.put('/articles', jsonParser, (request, response) => {
       const article = request.body;
-      Article.findOne({id: article.id}, (error: any, document: any) => {
-        if (document){
-          Article.updateOne({id: article.id}, article, (error: any, document: any) => {
-            response.send(document);
-          });
-        } else {
-          Article.create(article, (error: any, document: any) => {
-            response.send(document);
-          });
-        }
-      });
+      ArticleService.createOrUpdate(article).then(result => response.send(result));
     });
 
     app.get('/articles/:id/image', (request, response) => {

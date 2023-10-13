@@ -6,4 +6,4 @@ const categorySchema = new mongoose.Schema({
   parent: String
 });
 
-export const Category = mongoose.model('Category', categorySchema);
+export const CategoryRepository = mongoose.model('Category', categorySchema);
