@@ -4,7 +4,7 @@
     <mat-card-subtitle><h3 itemprop="description">{{article.controls.description.value}}</h3></mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p itemprop="content" [innerHTML]="article.controls.content.value"></p>
+    <p itemprop="content" [innerHTML]="normalizeContent()"></p>
   </mat-card-content>
 </mat-card>
 <mat-card *ngIf="isLoggedIn()">
@@ -40,7 +40,7 @@
       </textarea>
     </mat-form-field>
     <p>Preview:</p>
-    <p [innerHTML]="article.controls.content.value"></p>
+    <p [innerHTML]="normalizeContent()"></p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="accent" (click)="updateArticle()">Save</button>

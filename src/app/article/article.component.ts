@@ -18,6 +18,7 @@ import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js';
 })
 export class ArticleComponent implements OnInit, AfterViewChecked {
 
+  REGEX_TO_FIND_CODE = /```(ts|js)([\s\S]*?)```|`([^`]+)`/g;
   article = new ArticleFormGroup();
   formFata = new FormData();
 
@@ -76,4 +77,25 @@ export class ArticleComponent implements OnInit, AfterViewChecked {
     this.articleService.delete(this.article.controls.id.value).subscribe(_ =>
       this.router.navigateByUrl('/'));
   }
+
+  normalizeContent(): string {
+    return this.article.controls.content.value
+      .replace(this.REGEX_TO_FIND_CODE, (match, type, code, inlineCode) => {
+        const languageClass = this.findLanguageClass(type);
+        if (type)
+          return `<pre><code class="${languageClass}">${code.replace('\n', '')}</code></pre>`;
+        else if (inlineCode)
+          return `<code class="${languageClass}">${inlineCode}</code>`;
+        return '';
+      });
+  }
+
+  findLanguageClass(type: string): string {
+    switch (type) {
+      case 'ts': return 'lang-typescript';
+      case 'js': return 'lang-javascript';
+    }
+    return 'lang-none';
+  }
+
 }
