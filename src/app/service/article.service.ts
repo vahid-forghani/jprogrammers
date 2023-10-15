@@ -8,25 +8,27 @@ import { Article } from '../domain/article';
 })
 export class ArticleService {
 
+  URL_PREFIX = '/api/articles';
+
   constructor(private http: HttpClient) { }
 
   getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>('/api/articles');
+    return this.http.get<Article[]>(this.URL_PREFIX);
   }
 
   getArticle(id: string | null): Observable<Article> {
-    return this.http.get<Article>('/api/articles/' + id);
+    return this.http.get<Article>(`${this.URL_PREFIX}/${id}`);
   }
 
   updateArticle(article: Article): Observable<Article> {
-    return this.http.put<Article>('/api/articles', article);
+    return this.http.put<Article>(this.URL_PREFIX, article);
   }
 
   uploadImage(id: string, data: FormData): Observable<void> {
-    return this.http.post<void>('/api/articles/' + id +'/image/upload', data);
+    return this.http.post<void>(`${this.URL_PREFIX}/${id}/image/upload`, data);
   }
 
-  uploadAvatar(id: string, data: FormData): Observable<void> {
-    return this.http.post<void>('/api/articles/' + id +'/avatar/upload', data);
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.URL_PREFIX}/${id}`);
   }
 }

@@ -18,4 +18,8 @@ export class ArticleService {
       return ArticleRepository.create(article);
     }
   }
+
+  static async delete(id: string): Promise<any> {
+    return ArticleRepository.deleteOne({id});
+  }
 }
