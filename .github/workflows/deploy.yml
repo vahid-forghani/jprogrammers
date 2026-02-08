@@ -38,6 +38,9 @@ jobs:
         source: "dist/jprogrammers/*"
         target: "/var/www/html"
         rm: true
+        script: |
+          cd /var/www/html
+          mv mv dist/jprogrammers/* ./
 
     # =====================
     # BACKEND (Node API)
@@ -57,7 +60,7 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "api/*"
-        target: "/var/www/api"
+        target: "/var/www"
         rm: false
 
     - name: Restart API with PM2
@@ -69,5 +72,5 @@ jobs:
         script: |
           cd /var/www/api
           npm install --omit=dev
-          pm2 reload jprogrammers-api || pm2 start dist/index.js --name jprogrammers-api
+          pm2 reload jprogrammers-api || pm2 start dist/app.js --name jprogrammers-api
 
