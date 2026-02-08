@@ -1,0 +1,73 @@
+name: Deploy Angular + Node API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. Node
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    # =====================
+    # FRONTEND (Angular in root)
+    # =====================
+    - name: Install Angular dependencies
+      run: npm ci
+
+    - name: Build Angular app
+      run: npm run build -- --configuration production
+
+    - name: Deploy Angular to /var/www/html
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "dist/jprogrammers/*"
+        target: "/var/www/html"
+        rm: true
+
+    # =====================
+    # BACKEND (Node API)
+    # =====================
+    - name: Install API dependencies
+      working-directory: api
+      run: npm ci
+
+    - name: Build API
+      working-directory: api
+      run: npm run build
+
+    - name: Deploy API
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "api/*"
+        target: "/var/www/api"
+        rm: false
+
+    - name: Restart API with PM2
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /var/www/api
+          npm install --omit=dev
+          pm2 reload jprogrammers-api || pm2 start dist/index.js --name jprogrammers-api
+
