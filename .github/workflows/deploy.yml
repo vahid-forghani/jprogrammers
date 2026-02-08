@@ -37,7 +37,7 @@ jobs:
         remote_path: /var/www/html
         remote_host: ${{ secrets.SERVER_HOST }}
         remote_user: ${{ secrets.SERVER_USER }}
-        ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     # =====================
     # BACKEND (Node API)
