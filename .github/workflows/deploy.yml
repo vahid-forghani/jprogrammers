@@ -30,7 +30,7 @@ jobs:
       run: npm run build -- --configuration production
 
     - name: Deploy Angular to /var/www/html using rsync
-      uses: burnett01/rsync-deployments@v4
+      uses: burnett01/rsync-deployments@5.2
       with:
         switches: -avz --delete
         path: dist/jprogrammers/
