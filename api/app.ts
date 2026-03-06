@@ -1,8 +1,8 @@
 import express from 'express';
-import mongoose, {ConnectOptions} from 'mongoose';
-import {CategoryController} from './controller/category.controller';
-import {ArticleController} from './controller/article.controller';
-import {SecurityController} from './controller/security.controller';
+import mongoose, { ConnectOptions } from 'mongoose';
+import { CategoryController } from './controller/category.controller';
+import { ArticleController } from './controller/article.controller';
+import { SecurityController } from './controller/security.controller';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -20,10 +20,8 @@ app.listen(port, () => {
 
 mongoose.set('strictQuery', true);
 mongoose.connect(
-  '' + process.env.MONGO_URL,
+  process.env.MONGO_URL as string,
   {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     authSource: "admin",
     user: process.env.MONGO_USER,
     pass: process.env.MONGO_PASSWORD
