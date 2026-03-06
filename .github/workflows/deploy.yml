@@ -33,7 +33,7 @@ jobs:
       uses: burnett01/rsync-deployments@5.2
       with:
         switches: -avz --delete --exclude=.htaccess
-        path: dist/jprogrammers/
+        path: dist/jprogrammers/browser/
         remote_path: /var/www/html
         remote_host: ${{ secrets.SERVER_HOST }}
         remote_user: ${{ secrets.SERVER_USER }}
