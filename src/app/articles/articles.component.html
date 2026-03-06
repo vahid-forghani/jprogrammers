@@ -1,9 +1,11 @@
-<div *ngFor="let article of articles">
-  <mat-card>
-    <mat-card-header class="article-list-title" [routerLink]="'/articles/' + article.id">
-      <mat-card-title>{{article.title}}</mat-card-title>
-      <mat-card-subtitle>{{article.description}}</mat-card-subtitle>
-    </mat-card-header>
-  </mat-card>
-  <br/>
-</div>
+@for (article of articles; track article) {
+  <div>
+    <mat-card>
+      <mat-card-header class="article-list-title" [routerLink]="'/articles/' + article.id">
+        <mat-card-title>{{article.title}}</mat-card-title>
+        <mat-card-subtitle>{{article.description}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <br/>
+  </div>
+}

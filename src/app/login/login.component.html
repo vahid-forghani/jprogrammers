@@ -3,9 +3,11 @@
     <mat-form-field>
       <mat-label>Username</mat-label>
       <input matInput [formControl]="loginForm.controls.username" [errorStateMatcher]="matcher"/>
-      <mat-error *ngIf="loginForm.controls.username.hasError('invalidUsernameOrPassword')">
-        Username or password is invalid
-      </mat-error>
+      @if (loginForm.controls.username.hasError('invalidUsernameOrPassword')) {
+        <mat-error>
+          Username or password is invalid
+        </mat-error>
+      }
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>

@@ -1,49 +1,53 @@
-<mat-card *ngIf="!isLoggedIn()">
-  <mat-card-header>
-    <mat-card-title><h2 itemprop="title">{{article.controls.title.value}}</h2></mat-card-title>
-    <mat-card-subtitle><h3 itemprop="description">{{article.controls.description.value}}</h3></mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p itemprop="content" [innerHTML]="normalizeContent()"></p>
-  </mat-card-content>
-</mat-card>
-<mat-card *ngIf="isLoggedIn()">
-  <mat-card-header>
-    <mat-card-title>
+@if (!isLoggedIn()) {
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title><h2 itemprop="title">{{article.controls.title.value}}</h2></mat-card-title>
+      <mat-card-subtitle><h3 itemprop="description">{{article.controls.description.value}}</h3></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p itemprop="content" [innerHTML]="normalizeContent()"></p>
+    </mat-card-content>
+  </mat-card>
+}
+@if (isLoggedIn()) {
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <mat-form-field>
+          <mat-label>Id</mat-label>
+          <input matInput [formControl]="article.controls.id" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput [formControl]="article.controls.title" />
+        </mat-form-field>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input matInput [formControl]="article.controls.description" />
+        </mat-form-field>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
       <mat-form-field>
-        <mat-label>Id</mat-label>
-        <input matInput [formControl]="article.controls.id" />
+        <mat-label>Content</mat-label>
+        <textarea
+          [formControl]="article.controls.content"
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxRows="50"
+          >
+        </textarea>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Title</mat-label>
-        <input matInput [formControl]="article.controls.title" />
-      </mat-form-field>
-    </mat-card-title>
-    <mat-card-subtitle>
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-        <input matInput [formControl]="article.controls.description" />
-      </mat-form-field>
-    </mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-form-field>
-      <mat-label>Content</mat-label>
-      <textarea
-        [formControl]="article.controls.content"
-        matInput
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="5"
-        cdkAutosizeMaxRows="50"
-      >
-      </textarea>
-    </mat-form-field>
-    <p>Preview:</p>
-    <p [innerHTML]="normalizeContent()"></p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="accent" (click)="updateArticle()">Save</button>
-    <button mat-raised-button color="warn" (click)="deleteArticle()">Delete</button>
-  </mat-card-actions>
-</mat-card>
+      <p>Preview:</p>
+      <p [innerHTML]="normalizeContent()"></p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" (click)="updateArticle()">Save</button>
+      <button mat-raised-button color="warn" (click)="deleteArticle()">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+}
