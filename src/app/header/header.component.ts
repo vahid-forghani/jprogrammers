@@ -3,12 +3,15 @@ import {HeaderService} from '../service/header.service';
 import {CategoryFormArray} from './category.form-array';
 import {CategoryFormGroup} from './category.form-group';
 import {AuthService} from '../service/auth.service';
+import { MatToolbar } from '@angular/material/toolbar';
+import { RouterLink } from '@angular/router';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    standalone: false
+    imports: [MatToolbar, RouterLink, MatButton]
 })
 export class HeaderComponent {
 

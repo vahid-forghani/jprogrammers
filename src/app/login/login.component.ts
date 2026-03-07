@@ -3,12 +3,16 @@ import {LoginFormGroup} from './login.form-group';
 import {AuthService} from '../service/auth.service';
 import {Router} from "@angular/router";
 import {ComponentErrorStateMatcher} from "../ComponentErrorStateMatcher";
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatFormField, MatLabel, MatInput, MatError } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    standalone: false
+    imports: [MatGridList, MatGridTile, MatFormField, MatLabel, MatInput, ReactiveFormsModule, MatError, MatButton]
 })
 export class LoginComponent {
 

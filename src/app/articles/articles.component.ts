@@ -1,12 +1,20 @@
-import {Component} from '@angular/core';
-import {Article} from '../domain/article';
-import {ArticleService} from '../service/article.service';
+import { Component } from '@angular/core';
+import { Article } from '../domain/article';
+import { ArticleService } from '../service/article.service';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle } from '@angular/material/card';
+import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-articles',
-    templateUrl: './articles.component.html',
-    styleUrls: ['./articles.component.scss'],
-    standalone: false
+  selector: 'app-articles',
+  templateUrl: './articles.component.html',
+  styleUrls: ['./articles.component.scss'],
+  imports: [
+    MatCard,
+    MatCardHeader,
+    RouterLink,
+    MatCardTitle,
+    MatCardSubtitle
+  ]
 })
 export class ArticlesComponent {
 

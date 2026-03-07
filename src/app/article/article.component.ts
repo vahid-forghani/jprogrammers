@@ -1,21 +1,27 @@
-import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ArticleService} from '../service/article.service';
-import {AuthService} from '../service/auth.service';
-import {ArticleFormGroup} from './article.form-qroup';
-import {Article} from '../domain/article';
-import {highlightAll} from 'prismjs';
-import {Meta, Title} from "@angular/platform-browser";
+import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ArticleService } from '../service/article.service';
+import { AuthService } from '../service/auth.service';
+import { ArticleFormGroup } from './article.form-qroup';
+import { Article } from '../domain/article';
+import { highlightAll } from 'prismjs';
+import { Meta, Title } from "@angular/platform-browser";
 import 'prismjs/components/prism-typescript';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.min.js';
 import 'prismjs/plugins/toolbar/prism-toolbar.min.js';
 import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatCardActions } from '@angular/material/card';
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MatButton } from '@angular/material/button';
+import { switchMap } from 'rxjs';
 
 @Component({
-    selector: 'app-article',
-    templateUrl: './article.component.html',
-    styleUrls: ['./article.component.scss'],
-    standalone: false
+  selector: 'app-article',
+  templateUrl: './article.component.html',
+  styleUrls: ['./article.component.scss'],
+  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatFormField, MatLabel, MatInput, ReactiveFormsModule, CdkTextareaAutosize, MatCardActions, MatButton]
 })
 export class ArticleComponent implements OnInit, AfterViewChecked {
 
@@ -32,17 +38,16 @@ export class ArticleComponent implements OnInit, AfterViewChecked {
     private authService: AuthService,
     private titleService: Title,
     private metaService: Meta,
-    private router: Router) {
-
-  }
+    private router: Router) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.articleService.getArticle(this.articleId || params['id'])
-        .subscribe(article => {
-          this.article.patchValue(article);
-          this.setSEOTags(article);
-        });
+    this.activatedRoute.params.pipe(
+      switchMap(params =>
+        this.articleService.getArticle(this.articleId || params['id'])
+      )
+    ).subscribe(article => {
+      this.article.patchValue(article);
+      this.setSEOTags(article);
     });
 
   }
@@ -53,8 +58,8 @@ export class ArticleComponent implements OnInit, AfterViewChecked {
 
   setSEOTags(article: Article) {
     this.titleService.setTitle(article.title);
-    this.metaService.updateTag({name: 'title', content: article.title});
-    this.metaService.updateTag({name: 'description', content: article.description});
+    this.metaService.updateTag({ name: 'title', content: article.title });
+    this.metaService.updateTag({ name: 'description', content: article.description });
   }
 
   updateArticle(): void {
