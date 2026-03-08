@@ -1,6 +1,8 @@
 <mat-toolbar>
-  <span routerLink="" class="home">Jprogrammers</span>
-  <button mat-button color="accent" routerLink="/articles/about_me">About me</button>
+  <button matMiniFab routerLink="">
+    <mat-icon>home</mat-icon>
+  </button>
+  <button mat-button routerLink="/articles/about_me">About me</button>
   <span class="spacer"></span>
   @if (isLoggedIn()) {
     <button mat-button (click)="logout()">logout</button>

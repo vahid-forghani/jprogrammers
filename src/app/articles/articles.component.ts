@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Article } from '../domain/article';
 import { ArticleService } from '../service/article.service';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,11 +9,8 @@ import { RouterLink } from '@angular/router';
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
   imports: [
-    MatCard,
-    MatCardHeader,
-    RouterLink,
-    MatCardTitle,
-    MatCardSubtitle
+    MatCardModule,
+    RouterLink
   ]
 })
 export class ArticlesComponent {

@@ -1,17 +1,18 @@
-import {Component} from '@angular/core';
-import {HeaderService} from '../service/header.service';
-import {CategoryFormArray} from './category.form-array';
-import {CategoryFormGroup} from './category.form-group';
-import {AuthService} from '../service/auth.service';
-import { MatToolbar } from '@angular/material/toolbar';
+import { Component } from '@angular/core';
+import { HeaderService } from '../service/header.service';
+import { CategoryFormArray } from './category.form-array';
+import { CategoryFormGroup } from './category.form-group';
+import { AuthService } from '../service/auth.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
-    imports: [MatToolbar, RouterLink, MatButton]
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  imports: [MatToolbarModule, RouterLink, MatButtonModule, MatIconModule]
 })
 export class HeaderComponent {
 
@@ -34,7 +35,7 @@ export class HeaderComponent {
   }
 
   switchEditMode(category: CategoryFormGroup): void {
-    if (category.controls.edit.value){
+    if (category.controls.edit.value) {
       this.headerService.updateCategory(category.toResource()).subscribe();
     }
     category.controls.edit.setValue(!category.controls.edit.value);

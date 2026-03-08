@@ -2,21 +2,3 @@
 @import "prismjs/themes/prism-okaidia.min.css";
 @import "prismjs/plugins/toolbar/prism-toolbar.min.css";
 @import "prismjs/plugins/line-numbers/prism-line-numbers.min.css";
-html, body {
-  height: 100%;
-  // margin: 0 auto;
-}
-body {
-  background-color: #303030;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-.content-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-mat-card-title, p {
-  color: aliceblue;
-}
-.mat-mdc-card-header-text, mat-form-field {
-  width: 100%;
-}
